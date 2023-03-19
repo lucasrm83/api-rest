@@ -22,11 +22,12 @@ public class CategoryResources {
         return ResponseEntity.ok().body(list);
 
     }
-    /*@GetMapping(value = "/{id}")
-    public ResponseEntity<> findById(@PathVariable Long id){
-        return ResponseEntity.ok.body();
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Category> findById(@PathVariable Long id){
+        Category cat = new Category(1L, "Furniture");
+        return ResponseEntity.ok().body(cat);
 
-    }*/
+    }
 
 
 }
