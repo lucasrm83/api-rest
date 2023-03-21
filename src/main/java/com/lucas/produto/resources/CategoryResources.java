@@ -1,6 +1,8 @@
 package com.lucas.produto.resources;
 
 import com.lucas.produto.entities.Category;
+import com.lucas.produto.repositories.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,17 +16,20 @@ import java.util.List;
 @RequestMapping(value="/categories")
 public class CategoryResources {
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+
     @GetMapping
     public ResponseEntity<List<Category>> findAll(){
-        List<Category> list = new ArrayList<>();
-        list.add(new Category(1L,"eletronics"));
-        list.add(new Category(2L,"Books"));
+        List<Category> list = CategoryRepository.findAll();
+
         return ResponseEntity.ok().body(list);
 
     }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id){
-        Category cat = new Category(1L, "Furniture");
+        Category cat = CategoryRepository.findById(id);
         return ResponseEntity.ok().body(cat);
 
     }
